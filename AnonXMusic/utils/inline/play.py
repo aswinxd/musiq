@@ -69,7 +69,7 @@ def stream_markup(_, chat_id):
         [
             InlineKeyboardButton(text="Skip ▶️", callback_data=f"ADMIN Skip|{chat_id}"),
             InlineKeyboardButton(text="Stop 🔇", callback_data=f"ADMIN Stop|{chat_id}"),
-            InlineKeyboardButton(text="🎛️ Control", callback_data=f"help_callback hb4"),
+            InlineKeyboardButton(text="🎛️ Control", callback_data=f"LG"),
         ],
         [InlineKeyboardButton(text="Play Mode⚙️", callback_data=f"PM")],
         [InlineKeyboardButton(text="Close ❌", callback_data="close ❌")],
