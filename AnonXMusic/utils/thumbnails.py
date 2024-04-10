@@ -74,17 +74,17 @@ async def get_thumb(videoid):
         
         # Define larger font sizes for each text
         powered_by_font = ImageFont.truetype("AnonXMusic/assets/font.ttf", 50)
-        arial = ImageFont.truetype("AnonXMusic/assets/font2.ttf", 50)  # Increase font size
-        font = ImageFont.truetype("AnonXMusic/assets/font.ttf", 50)  # Increase font size
+        arial = ImageFont.truetype("AnonXMusic/assets/font2.ttf", 47)  # Increase font size
+        font = ImageFont.truetype("AnonXMusic/assets/font.ttf", 47)  # Increase font size
         
         # Draw "Powered by YouTube" text on the top left corner
-        draw.text((20, 20), "Powered by Xenon", fill="blue", font=powered_by_font)
+        draw.text((20, 20), "Powered by Xenon", fill="White", font=powered_by_font)
         
-        draw.text((1110, 8), unidecode(app.name), fill="white", font=arial)
+        draw.text((1101, 8), unidecode(app.name), fill="Green", font=arial)
         draw.text(
-            (55, 560),
+            (52, 557),
             f"{channel} | {views[:23]}",
-            (255, 255, 255),
+            (222, 222, 222),
             font=arial,
         )
         draw.text(
@@ -96,18 +96,18 @@ async def get_thumb(videoid):
         draw.line(
             [(55, 660), (1220, 660)],
             fill="white",
-            width=5,
+            width=7,
             joint="curve",
         )
         draw.ellipse(
             [(918, 648), (942, 672)],
-            outline="white",
+            outline="Blue",
             fill="white",
-            width=15,
+            width=18,
         )
         draw.text(
             (36, 685),
-            "00:48",
+            "01:00",
             (255, 255, 255),
             font=arial,
         )
