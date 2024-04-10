@@ -8,7 +8,7 @@ from pyrogram.types import CallbackQuery, InputMediaPhoto, Message
 import config
 from AnonXMusic import app
 from AnonXMusic.misc import db
-from AnonXMusic.utils import AnonyBin, seconds_to_min
+from AnonXMusic.utils import AnonyBin, get_channeplayCB, seconds_to_min
 from AnonXMusic.utils.database import get_cmode, is_active_chat, is_music_playing
 from AnonXMusic.utils.decorators.language import language, languageCB
 from AnonXMusic.utils.inline import queue_back_markup, queue_markup
@@ -165,11 +165,11 @@ async def queued_tracks(client, CallbackQuery: CallbackQuery, _):
     for x in got:
         j += 1
         if j == 1:
-            msg += f'Streaming :\n\n Title : {x["title"]}\nDuration : {x["dur"]}\nBy : {x["by"]}\n\n'
+            msg += f'Streaming :\n\n✨ Title : {x["title"]}\nDuration : {x["dur"]}\nBy : {x["by"]}\n\n'
         elif j == 2:
-            msg += f'Queued :\n\n Title : {x["title"]}\nDuration : {x["dur"]}\nBy : {x["by"]}\n\n'
+            msg += f'Queued :\n\n✨ Title : {x["title"]}\nDuration : {x["dur"]}\nBy : {x["by"]}\n\n'
         else:
-            msg += f'Title : {x["title"]}\nDuration : {x["dur"]}\nBy : {x["by"]}\n\n'
+            msg += f'✨ Title : {x["title"]}\nDuration : {x["dur"]}\nBy : {x["by"]}\n\n'
     if "Queued" in msg:
         if len(msg) < 700:
             await asyncio.sleep(1)
