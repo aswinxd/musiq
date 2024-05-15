@@ -50,22 +50,14 @@ def vote_mode_markup(_, current, mode: Union[bool, str] = None):
 def auth_users_markup(_, status: Union[bool, str] = None):
     buttons = [
         [
-            InlineKeyboardButton(text=_["ST_B_7"], callback_data="AUTHANSWER"),
-            InlineKeyboardButton(
-                text=_["ST_B_8"] if status == True else _["ST_B_9"],
-                callback_data="AUTH",
-            ),
+            InlineKeyboardButton(text="Skip", callback_data=f"ADMIN Skip|{chat_id}"),
+            InlineKeyboardButton(text="Stop", callback_data=f"ADMIN Stop|{chat_id}"),
         ],
         [
-            InlineKeyboardButton(text=_["ST_B_1"], callback_data="AUTHLIST"),
+            InlineKeyboardButton(text="Pause", callback_data=f"ADMIN Pause|{chat_id}"),
+            InlinekeyboardButton(text="Resume", callback_data=f"ADMIN Resume|{chat_id}"),
         ],
-        [
-            InlineKeyboardButton(
-                text=_["BACK_BUTTON"],
-                callback_data="settings_helper",
-            ),
-            InlineKeyboardButton(text=_["CLOSE_BUTTON"], callback_data="close"),
-        ],
+        [InlineKeyboardButton(text=_["CLOSE_BUTTON"], callback_data="close")],
     ]
     return buttons
 
