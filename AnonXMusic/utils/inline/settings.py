@@ -47,7 +47,7 @@ def vote_mode_markup(_, current, mode: Union[bool, str] = None):
     return buttons
 
 
-def auth_users_markup(_, status: Union[bool, str] = None):
+def auth_users_markup(_, chat_id, played, dur):
     buttons = [
         [
             InlineKeyboardButton(text="Skip", callback_data=f"ADMIN Skip|{chat_id}"),
