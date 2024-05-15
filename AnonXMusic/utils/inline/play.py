@@ -1,7 +1,8 @@
 import math
 import asyncio
-from pyrogram.types import InlineKeyboardButton
-
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+#from pyrogram import InlineKeyboardButton, 
+from pyrogram.types import CallbackQuery
 from AnonXMusic.utils.formatters import time_to_seconds
 
 
