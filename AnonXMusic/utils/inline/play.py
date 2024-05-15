@@ -68,10 +68,8 @@ def track_markup(_, videoid, user_id, channel, fplay):
 
 
 
-def stream_markup(_, query: CallbackQuery):
-    chat_id = query.message.chat.id
-
-    if query.data == "CTRL":
+def stream_markup(callback_data, chat_id):
+    if callback_data == "CTRL":
         buttons = [
             [
                 InlineKeyboardButton(text="Skip", callback_data=f"ADMIN Skip|{chat_id}"),
@@ -90,8 +88,7 @@ def stream_markup(_, query: CallbackQuery):
                 InlineKeyboardButton(text="Close ❌", callback_data="close"),
             ]
         ]
-    
-    query.message.edit_reply_markup(reply_markup=InlineKeyboardMarkup(buttons))
+    return buttons
     
 def playlist_markup(_, videoid, user_id, ptype, channel, fplay):
     buttons = [
