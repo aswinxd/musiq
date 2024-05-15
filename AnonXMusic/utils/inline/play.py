@@ -65,29 +65,30 @@ def track_markup(_, videoid, user_id, channel, fplay):
     ]
     return buttons
 
-def auth_users_markup(_, chat_id, played, dur):
-    buttons = [
-        [
-            InlineKeyboardButton(text="Skip", callback_data=f"ADMIN Skip|{chat_id}"),
-            InlineKeyboardButton(text="Stop", callback_data=f"ADMIN Stop|{chat_id}"),
-        ],
-        [
-            InlineKeyboardButton(text="Pause", callback_data=f"ADMIN Pause|{chat_id}"),
-            InlinekeyboardButton(text="Resume", callback_data=f"ADMIN Resume|{chat_id}"),
-        ],
-        [InlineKeyboardButton(text=_["CLOSE_BUTTON"], callback_data="close")],
-    ]
-    return buttons
 
-def stream_markup(_, chat_id):
-    buttons = [
-    [
-        InlineKeyboardButton(text="🎛️ Control", callback_data="AU"),
-        InlineKeyboardButton(text="Close ❌", callback_data="close ❌")
-    ]
-    ]
-    return buttons
 
+def stream_markup(callback_data, chat_id):
+    if callback_data == "AU":
+        buttons = [
+            [
+                InlineKeyboardButton(text="Skip", callback_data=f"ADMIN Skip|{chat_id}"),
+                InlineKeyboardButton(text="Stop", callback_data=f"ADMIN Stop|{chat_id}"),
+            ],
+            [
+                InlineKeyboardButton(text="Pause", callback_data=f"ADMIN Pause|{chat_id}"),
+                InlineKeyboardButton(text="Resume", callback_data=f"ADMIN Resume|{chat_id}"),
+            ],
+            [InlineKeyboardButton(text="Close ❌", callback_data="close")],
+        ]
+    else:
+        buttons = [
+            [
+                InlineKeyboardButton(text="🎛️ Control", callback_data="AU"),
+                InlineKeyboardButton(text="Close ❌", callback_data="close"),
+            ]
+        ]
+    return buttons
+    
 def playlist_markup(_, videoid, user_id, ptype, channel, fplay):
     buttons = [
         [
