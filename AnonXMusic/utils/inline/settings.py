@@ -47,19 +47,6 @@ def vote_mode_markup(_, current, mode: Union[bool, str] = None):
     return buttons
 
 
-def auth_users_markup(_, chat_id, played, dur):
-    buttons = [
-        [
-            InlineKeyboardButton(text="Skip", callback_data=f"ADMIN Skip|{chat_id}"),
-            InlineKeyboardButton(text="Stop", callback_data=f"ADMIN Stop|{chat_id}"),
-        ],
-        [
-            InlineKeyboardButton(text="Pause", callback_data=f"ADMIN Pause|{chat_id}"),
-            InlinekeyboardButton(text="Resume", callback_data=f"ADMIN Resume|{chat_id}"),
-        ],
-        [InlineKeyboardButton(text=_["CLOSE_BUTTON"], callback_data="close")],
-    ]
-    return buttons
 
 
 def playmode_users_markup(
