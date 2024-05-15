@@ -67,7 +67,7 @@ def track_markup(_, videoid, user_id, channel, fplay):
 def stream_markup(_, chat_id):
     buttons = [
     [
-        InlineKeyboardButton(text="🎛️ Control", callback_data="LG"),
+        InlineKeyboardButton(text="🎛️ Control", callback_data="AU"),
         InlineKeyboardButton(text="Close ❌", callback_data="close ❌")
     ]
     ]
