@@ -68,7 +68,7 @@ def track_markup(_, videoid, user_id, channel, fplay):
 
 
 def stream_markup(callback_data, chat_id):
-    if callback_data == "AU":
+    if callback_data == "CTRL":
         buttons = [
             [
                 InlineKeyboardButton(text="Skip", callback_data=f"ADMIN Skip|{chat_id}"),
@@ -83,7 +83,7 @@ def stream_markup(callback_data, chat_id):
     else:
         buttons = [
             [
-                InlineKeyboardButton(text="🎛️ Control", callback_data="AU"),
+                InlineKeyboardButton(text="🎛️ Control", callback_data="CTRL"),
                 InlineKeyboardButton(text="Close ❌", callback_data="close"),
             ]
         ]
