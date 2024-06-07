@@ -79,7 +79,7 @@ def stream_markup(chat_id):
     ]
     return InlineKeyboardMarkup(buttons)
 
-@app.on_callback_query(filter.regex("CTRL"))
+@app.on_callback_query(filters.regex("CTRL"))
 async def handle_control_callback(client, callback_query: CallbackQuery):
     chat_id = callback_query.message.chat.id
     buttons = [
