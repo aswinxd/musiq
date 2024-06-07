@@ -75,7 +75,7 @@ def stream_markup(callback_data, chat_id):
                 InlineKeyboardButton(text="Close ❌", callback_data="close"),
             ]
         ]
-    if callback_data == "CTRL"
+    elif query.data == "CTRL":
         buttons = [
             [
                 InlineKeyboardButton(text="Skip", callback_data=f"ADMIN Skip|{chat_id}"),
