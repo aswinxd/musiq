@@ -11,8 +11,8 @@ from AnonXMusic.misc import sudo
 from AnonXMusic.plugins import ALL_MODULES
 from AnonXMusic.utils.database import get_banned_users, get_gbanned
 from config import BANNED_USERS
-from pyrogram import Client
-app = Client("my_bot")
+#from pyrogram import Client
+#app = Client("my_bot")
 
 async def init():
     if (
