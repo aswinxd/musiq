@@ -68,28 +68,31 @@ def track_markup(_, videoid, user_id, channel, fplay):
 
 
 
-def stream_markup(callback_data, chat_id):
-        buttons = [
-            [
-                InlineKeyboardButton(text="🎛️ Control", callback_data="CTRL"),
-                InlineKeyboardButton(text="Close ❌", callback_data="close"),
-            ]
+def stream_markup(chat_id):
+    buttons = [
+        [
+            InlineKeyboardButton(text="🎛️ Control", callback_data="CTRL"),
+            InlineKeyboardButton(text="Close ❌", callback_data="close"),
         ]
-    elif query.data == "CTRL":
-        buttons = [
-            [
-                InlineKeyboardButton(text="Skip", callback_data=f"ADMIN Skip|{chat_id}"),
-                InlineKeyboardButton(text="Stop", callback_data=f"ADMIN Stop|{chat_id}"),
-            ],
-            [
-                InlineKeyboardButton(text="Pause", callback_data=f"ADMIN Pause|{chat_id}"),
-                InlineKeyboardButton(text="Resume", callback_data=f"ADMIN Resume|{chat_id}"),
-            ],
-            [InlineKeyboardButton(text="Close ❌", callback_data="close")],
-        ]
-    else:
-        
-    return buttons
+    ]
+    return 
+
+@app.on_callback_query(filters.regex("CTRL"))
+async def handle_control_callback(client, callback_query: CallbackQuery):
+    chat_id = callback_query.message.chat.id
+    buttons = [
+        [
+            InlineKeyboardButton(text="Skip", callback_data=f"ADMIN Skip|{chat_id}"),
+            InlineKeyboardButton(text="Stop", callback_data=f"ADMIN Stop|{chat_id}"),
+        ],
+        [
+            InlineKeyboardButton(text="Pause", callback_data=f"ADMIN Pause|{chat_id}"),
+            InlineKeyboardButton(text="Resume", callback_data=f"ADMIN Resume|{chat_id}"),
+        ],
+        [InlineKeyboardButton(text="Close ❌", callback_data="close")],
+    ]
+    reply_markup = InlineKeyboardMarkup(buttons)
+    await callback_query.message.edit_reply_markup(reply_markup=reply_markup)
     
 def playlist_markup(_, videoid, user_id, ptype, channel, fplay):
     buttons = [
