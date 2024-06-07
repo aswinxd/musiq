@@ -69,6 +69,12 @@ def track_markup(_, videoid, user_id, channel, fplay):
 
 
 def stream_markup(callback_data, chat_id):
+        buttons = [
+            [
+                InlineKeyboardButton(text="🎛️ Control", callback_data="CTRL"),
+                InlineKeyboardButton(text="Close ❌", callback_data="close"),
+            ]
+        ]
     if callback_data == "CTRL":
         buttons = [
             [
@@ -82,12 +88,7 @@ def stream_markup(callback_data, chat_id):
             [InlineKeyboardButton(text="Close ❌", callback_data="close")],
         ]
     else:
-        buttons = [
-            [
-                InlineKeyboardButton(text="🎛️ Control", callback_data="CTRL"),
-                InlineKeyboardButton(text="Close ❌", callback_data="close"),
-            ]
-        ]
+        
     return buttons
     
 def playlist_markup(_, videoid, user_id, ptype, channel, fplay):
