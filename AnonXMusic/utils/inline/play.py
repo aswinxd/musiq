@@ -1,12 +1,12 @@
 import math
 import asyncio
-#from pyrogram import Client
+from pyrogram import Client
 from pyrogram import filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 #from pyrogram import InlineKeyboardButton, 
 from pyrogram.types import CallbackQuery
 from AnonXMusic.utils.formatters import time_to_seconds
-#app = Client("my_bot")
+app = Client("my_bot")
 
 def stream_markup_timer(_, chat_id, played, dur):
     played_sec = time_to_seconds(played)
@@ -70,14 +70,33 @@ def track_markup(_, videoid, user_id, channel, fplay):
 
 
 
-def stream_markup(chat_id):
+def stream_markup(callback_data, chat_id):
     buttons = [
         [
+            InlineKeyboardButton(text="🎛️ Control", callback_data="CTRL"),
             InlineKeyboardButton(text="Close ❌", callback_data="close"),
         ]
     ]
-    return buttons
+    return InlineKeyboardMarkup(buttons)
 
+
+@app.on_callback_query(filters.regex("CTRL"))
+async def handle_control_callback(client, callback_query: CallbackQuery):
+    chat_id = callback_query.message.chat.id
+    buttons = [
+        [
+            InlineKeyboardButton(text="Skip", callback_data=f"ADMIN Skip|{chat_id}"),
+            InlineKeyboardButton(text="Stop", callback_data=f"ADMIN Stop|{chat_id}"),
+        ],
+        [
+            InlineKeyboardButton(text="Pause", callback_data=f"ADMIN Pause|{chat_id}"),
+            InlineKeyboardButton(text="Resume", callback_data=f"ADMIN Resume|{chat_id}"),
+        ],
+        [InlineKeyboardButton(text="Close ❌", callback_data="close")],
+    ]
+    reply_markup = InlineKeyboardMarkup(buttons)
+    await callback_query.message.edit_reply_markup(reply_markup=reply_markup)
+    
 def playlist_markup(_, videoid, user_id, ptype, channel, fplay):
     buttons = [
         [
