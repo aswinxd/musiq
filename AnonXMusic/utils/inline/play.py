@@ -1,10 +1,12 @@
 import math
 import asyncio
+from pyrogram import Client
+
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 #from pyrogram import InlineKeyboardButton, 
 from pyrogram.types import CallbackQuery
 from AnonXMusic.utils.formatters import time_to_seconds
-
+app = Client("my_bot")
 
 def stream_markup_timer(_, chat_id, played, dur):
     played_sec = time_to_seconds(played)
