@@ -66,22 +66,27 @@ async def init():
 # Add /clone command handler
 @app.on_message(filters.command("clone") & filters.private)
 async def clone_bot(client, message: Message):
-    await message.reply("Please forward me the token of the bot you want to clone.")
+    await message.reply("Please send me the bot token of the bot you want to clone.")
 
-# Handle forwarded bot tokens
-@app.on_message(filters.forwarded & filters.private)
+# Handle the received bot token directly
+@app.on_message(filters.private & filters.text)
 async def receive_token(client, message: Message):
     token = message.text.strip()
     
     # Simple token validation
-    if len(token) < 46:
+    if len(token) < 46 or not token.startswith(""):
         await message.reply("Invalid token. Please try again.")
         return
 
+    # Create a new Client instance with the received token
     new_bot = Client("NewClonedBot", api_id=config.API_ID, api_hash=config.API_HASH, bot_token=token)
 
     try:
         await new_bot.start()
+
+        # Import all modules into the new bot instance to replicate the main bot's functionality
+        for all_module in ALL_MODULES:
+            importlib.import_module("AnonXMusic.plugins" + all_module)
 
         # Store the new bot instance in the dictionary
         cloned_bots[token] = {
@@ -90,6 +95,9 @@ async def receive_token(client, message: Message):
         }
 
         await message.reply("Bot successfully cloned! The new bot is now running.")
+        
+        # Start the cloned bot's event loop
+        asyncio.create_task(new_bot.idle())
         
     except BadRequest as e:
         await message.reply(f"Failed to start the bot with the provided token: {e}")
