@@ -19,7 +19,8 @@ from AnonXMusic.utils.inline.stats import back_stats_buttons, stats_buttons
 from config import BANNED_USERS
 
 
-@app.on_message(filters.command(["sudostats", "globalstats"]) & filters.group & ~BANNED_USERS)
+
+@app.on_message(filters.command(["ggstats", "ggstats"]) & filters.group & ~BANNED_USERS)
 @language
 async def stats_global(client, message: Message, _):
     upl = stats_buttons(_, True if message.from_user.id in SUDOERS else False)
@@ -60,8 +61,9 @@ async def overall_stats(client, CallbackQuery, _):
         served_users,
         len(ALL_MODULES),
         len(SUDOERS),
-        config.AUTO_LEAVING_ASSISTANT,
+        await is_autoend(),
         config.DURATION_LIMIT_MIN,
+        await is_autoleave()  
     )
     med = InputMediaPhoto(media=config.STATS_IMG_URL, caption=text)
     try:
