@@ -1,16 +1,19 @@
+import uvloop
+
+uvloop.install()
+
 from pyrogram import Client, errors
 from pyrogram.enums import ChatMemberStatus, ParseMode
 
 import config
-
 from ..logging import LOGGER
 
 
-class Anony(Client):
+class Aviax(Client):
     def __init__(self):
         LOGGER(__name__).info(f"Starting Bot...")
         super().__init__(
-            name="AnonXMusic",
+            name="AviaxMusic",
             api_id=config.API_ID,
             api_hash=config.API_HASH,
             bot_token=config.BOT_TOKEN,
@@ -28,7 +31,7 @@ class Anony(Client):
 
         try:
             await self.send_message(
-                chat_id=config.LOGGER_ID,
+                chat_id=config.LOG_GROUP_ID,
                 text=f"<u><b>» {self.mention} ʙᴏᴛ sᴛᴀʀᴛᴇᴅ :</b><u>\n\nɪᴅ : <code>{self.id}</code>\nɴᴀᴍᴇ : {self.name}\nᴜsᴇʀɴᴀᴍᴇ : @{self.username}",
             )
         except (errors.ChannelInvalid, errors.PeerIdInvalid):
@@ -42,7 +45,7 @@ class Anony(Client):
             )
             exit()
 
-        a = await self.get_chat_member(config.LOGGER_ID, self.id)
+        a = await self.get_chat_member(config.LOG_GROUP_ID, self.id)
         if a.status != ChatMemberStatus.ADMINISTRATOR:
             LOGGER(__name__).error(
                 "Please promote your bot as an admin in your log group/channel."
