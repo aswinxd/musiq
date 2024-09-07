@@ -69,7 +69,7 @@ def track_markup(_, videoid, user_id, channel, fplay):
 
 
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
-stream_markup(callback_data, chat_id):
+def stream_markup(callback_data, chat_id):
     if callback_data == "CTRL":
         buttons = [
             [
