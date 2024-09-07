@@ -133,21 +133,6 @@ async def skip(cli, message: Message, _, chat_id):
             await Anony.skip_stream(chat_id, file_path, video=status, image=image)
         except:
             return await mystic.edit_text(_["call_6"])
-       # button = stream_markup(_, chat_id)
-        button = stream_markup(_, chat_id)
-                run = await app.send_message(
-                    chat_id=original_chat_id,
-                    text=_["stream_1"].format(
-                        f"https://t.me/{app.username}?start=info_{videoid}",
-                        title[:23],
-                        check[0]["dur"],
-                        user,
-                    ),
-                    reply_markup=InlineKeyboardMarkup(button),
-                )
-                db[chat_id][0]["mystic"] = run
-                db[chat_id][0]["markup"] = "tg"
-        await mystic.delete()
     elif "index_" in queued:
         try:
             await Anony.skip_stream(chat_id, videoid, video=status)
