@@ -219,6 +219,8 @@ async def del_back_playlist(client, CallbackQuery, _):
                 )
             try:
                 image = None
+            except:
+                return
             try:
                 await Anony.skip_stream(chat_id, link, video=status, image=image)
             except:
