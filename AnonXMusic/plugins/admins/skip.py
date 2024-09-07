@@ -114,20 +114,6 @@ async def skip(cli, message: Message, _, chat_id):
             await Anony.skip_stream(chat_id, link, video=status, image=image)
         except:
             return await message.reply_text(_["call_6"])
-        #button = stream_markup(_, chat_id)
-        button = stream_markup(_, chat_id)
-                run = await app.send_message(
-                    chat_id=original_chat_id,
-                    text=_["stream_1"].format(
-                        f"https://t.me/{app.username}?start=info_{videoid}",
-                        title[:23],
-                        check[0]["dur"],
-                        user,
-                    ),
-                    reply_markup=InlineKeyboardMarkup(button),
-                )
-                db[chat_id][0]["mystic"] = run
-                db[chat_id][0]["markup"] = "tg"
     elif "vid_" in queued:
         mystic = await message.reply_text(_["call_7"], disable_web_page_preview=True)
         try:
@@ -217,16 +203,15 @@ async def skip(cli, message: Message, _, chat_id):
             db[chat_id][0]["markup"] = "tg"
         else:
             button = stream_markup(_, chat_id)
-            img = await get_thumb(videoid)
-            run = await message.reply_photo(
-                photo=img,
-                caption=_["stream_1"].format(
-                    f"https://t.me/{app.username}?start=info_{videoid}",
-                    title[:23],
-                    check[0]["dur"],
-                    user,
-                ),
-                reply_markup=InlineKeyboardMarkup(button),
-            )
-            db[chat_id][0]["mystic"] = run
-            db[chat_id][0]["markup"] = "stream"
+                run = await app.send_message(
+                    chat_id=original_chat_id,
+                    text=_["stream_1"].format(
+                        f"https://t.me/{app.username}?start=info_{videoid}",
+                        title[:23],
+                        check[0]["dur"],
+                        user,
+                    ),
+                    reply_markup=InlineKeyboardMarkup(button),
+                )
+                db[chat_id][0]["mystic"] = run
+                db[chat_id][0]["markup"] = "tg"
