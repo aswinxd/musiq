@@ -85,8 +85,7 @@ def stream_markup(callback_data, chat_id):
     else:
         buttons = [
             [
-                InlineKeyboardButton(text="🎛️ Control", callback_data=f"CTRL"),
-                InlineKeyboardButton(text="Close ❌", callback_data="close"),
+                InlineKeyboardButton(text="Close Player❌", callback_data="close"),
             ]
         ]
     return buttons
