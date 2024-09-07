@@ -97,25 +97,18 @@ async def handle_callback(client, callback_query):
     data = callback_query.data
     chat_id = callback_query.message.chat.id
 
-    try:
-        if data == "CTRL":
-            # Delete the current message
-            await callback_query.message.delete()
-
-            # Send a new message with control buttons
-            await client.send_message(
-                chat_id=chat_id,
-                text="Control Panel:",
-                reply_markup=stream_markup("CTRL", chat_id)
-            )
-        elif data.startswith("ADMIN"):
-            # Handle other admin actions such as Skip, Stop, etc.
-            action, chat_id = data.split("|")
-            await callback_query.answer(f"{action} command received.")
-        elif data == "close":
-            await callback_query.message.delete()
-    except Exception as e:
-        await callback_query.answer(f"Error: {e}")
+    if data == "CTRL":
+        # Edit message to show control buttons
+        await callback_query.message.edit_reply_markup(reply_markup=stream_markup("CTRL", chat_id))
+    elif data.startswith("ADMIN"):
+        # Handle other admin actions such as Skip, Stop, etc.
+        # Extract the action from the callback data
+        action, chat_id = data.split("|")
+        # Perform actions like Skip, Pause, Resume, etc.
+        await callback_query.answer(f"{action} command received.")
+    elif data == "close":
+        await callback_query.message.delete()
+        
 def playlist_markup(_, videoid, user_id, ptype, channel, fplay):
     buttons = [
         [
