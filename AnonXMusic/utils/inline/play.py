@@ -69,7 +69,7 @@ def track_markup(_, videoid, user_id, channel, fplay):
 
 
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
-def stream_markup(callback_data, chat_id):
+stream_markup(callback_data, chat_id):
     if callback_data == "CTRL":
         buttons = [
             [
@@ -91,19 +91,31 @@ def stream_markup(callback_data, chat_id):
         ]
     return InlineKeyboardMarkup(buttons)
 
+# Handle the callback
 @app.on_callback_query()
 async def handle_callback(client, callback_query):
     data = callback_query.data
     chat_id = callback_query.message.chat.id
 
-    if data == "CTRL":
-        await callback_query.message.edit_reply_markup(reply_markup=stream_markup("CTRL", chat_id))
-    elif data.startswith("ADMIN"):
-        action, chat_id = data.split("|")
-        await callback_query.answer(f"{action} command received.")
-    elif data == "close":
-        await callback_query.message.delete()
-    
+    try:
+        if data == "CTRL":
+            # Delete the current message
+            await callback_query.message.delete()
+
+            # Send a new message with control buttons
+            await client.send_message(
+                chat_id=chat_id,
+                text="Control Panel:",
+                reply_markup=stream_markup("CTRL", chat_id)
+            )
+        elif data.startswith("ADMIN"):
+            # Handle other admin actions such as Skip, Stop, etc.
+            action, chat_id = data.split("|")
+            await callback_query.answer(f"{action} command received.")
+        elif data == "close":
+            await callback_query.message.delete()
+    except Exception as e:
+        await callback_query.answer(f"Error: {e}")
 def playlist_markup(_, videoid, user_id, ptype, channel, fplay):
     buttons = [
         [
