@@ -21,7 +21,7 @@ from AnonXMusic.utils.decorators.language import languageCB
 from AnonXMusic.utils.formatters import seconds_to_min
 from AnonXMusic.utils.inline import close_markup, stream_markup, stream_markup_timer
 from AnonXMusic.utils.stream.autoclear import auto_clean
-from AnonXMusic.utils.thumbnails import get_thumb
+#from AnonXMusic.utils.thumbnails import get_thumb
 from config import (
     BANNED_USERS,
     SOUNCLOUD_IMG_URL,
@@ -218,8 +218,6 @@ async def del_back_playlist(client, CallbackQuery, _):
                     reply_markup=close_markup(_),
                 )
             try:
-                image = await YouTube.thumbnail(videoid, True)
-            except:
                 image = None
             try:
                 await Anony.skip_stream(chat_id, link, video=status, image=image)
@@ -227,7 +225,7 @@ async def del_back_playlist(client, CallbackQuery, _):
                 return await CallbackQuery.message.reply_text(_["call_6"])
             button = stream_markup(_, chat_id)
             img = await get_thumb(videoid)
-            run = await CallbackQuery.message.reply_photo(
+            run = await CallbackQuery.message.reply_text(
                 photo=img,
                 caption=_["stream_1"].format(
                     f"https://t.me/{app.username}?start=info_{videoid}",
